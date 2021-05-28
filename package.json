@@ -10,9 +10,9 @@
         "build": "cross-env NODE_ENV=production node ./build/build.js",
         "watch": "webpack --watch --mode production",
         "postinstall": "cpy ./node_modules/framework7-icons/fonts/*.* ./src/fonts/",
-        "monaca:preview": "npm run dev",
+        "monaca:preview": "npm run dev & npm run watch",
         "monaca:transpile": "npm run build",
-        "monaca:debug": "npm run watch" 
+        "monaca:debug": "npm run watch"
     },
     "browserslist": [
         "Android >= 7",

@@ -31,7 +31,7 @@ module.exports = {
   },
   output: {
     path: resolvePath('www'),
-    filename: 'js/[name].js',
+    filename: 'js/[name].bundle.js',
     chunkFilename: 'js/[name].js',
     publicPath: '',
     hotUpdateChunkFilename: 'hot/hot-update.js',
@@ -177,9 +177,10 @@ module.exports = {
 
     ]),
     new HtmlWebpackPlugin({
-      filename: './index.html',
-      template: './src/index.html',
+      template: './src/public/index.html.ejs',
       inject: true,
+      externalCSS: ['components/loader.css'],
+      externalJS: ['components/loader.js'],
       minify: env === 'production' ? {
         collapseWhitespace: true,
         removeComments: true,
