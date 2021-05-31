@@ -31,7 +31,7 @@ module.exports = {
   },
   output: {
     path: resolvePath('www'),
-    filename: 'js/[name].bundle.js',
+    filename: 'js/[name].js',
     chunkFilename: 'js/[name].js',
     publicPath: '',
     hotUpdateChunkFilename: 'hot/hot-update.js',
@@ -42,7 +42,6 @@ module.exports = {
     alias: {
       '@': resolvePath('src'),
     },
-
   },
   devtool: env === 'production' ? 'source-map' : 'eval',
   devServer: {
@@ -54,6 +53,12 @@ module.exports = {
     contentBase: '/www/',
     disableHostCheck: true,
     historyApiFallback: true,
+    proxy: {
+      '/monaca_terminal': {
+         target: socketPort,
+         ws: wss
+      },
+    },
   },
   optimization: {
     concatenateModules: true,
@@ -177,6 +182,7 @@ module.exports = {
 
     ]),
     new HtmlWebpackPlugin({
+      filename: './index.html',
       template: './src/public/index.html.ejs',
       inject: true,
       externalCSS: ['components/loader.css'],
