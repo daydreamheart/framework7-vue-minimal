@@ -31,5 +31,14 @@ node_modules/
 .env
 
 # Misc
-.DS_Store
 Thumbs.db
+/.monaca/*
+!/.monaca/project_info.json
+/platforms
+.DS_Store
+*.swp
+.vscode/
+typings/
+node_modules
+.git
+package-lock.json

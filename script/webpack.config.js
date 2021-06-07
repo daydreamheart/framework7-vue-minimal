@@ -176,26 +176,29 @@ module.exports = {
     new VueLoaderPlugin(),
     ...(env === 'production' ? [
       new CssMinimizerPlugin(),
+      new HtmlWebpackPlugin({
+        filename: './index.html',
+        template: './src/public/index.html.ejs',
+        inject: true,
+        externalCSS: ['components/loader.css'],
+        externalJS: ['components/loader.js'],
+        minify: env === 'production' ? {
+          collapseWhitespace: true,
+          removeComments: true,
+          removeRedundantAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          useShortDoctype: true
+        } : false,
+      }),
     ] : [
       // Development only plugins
       new webpack.HotModuleReplacementPlugin(),
-
+      new HtmlWebpackPlugin({
+        filename: './index.html',
+        template: './src/public/index.html.ejs',
+      }),
     ]),
-    new HtmlWebpackPlugin({
-      filename: './index.html',
-      template: './src/public/index.html.ejs',
-      inject: true,
-      externalCSS: ['components/loader.css'],
-      externalJS: ['components/loader.js'],
-      minify: env === 'production' ? {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      } : false,
-    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
     }),

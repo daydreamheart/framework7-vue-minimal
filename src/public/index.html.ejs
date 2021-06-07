@@ -25,9 +25,11 @@
 
   <!-- The following lines include the necessary CSS and JS
   from Monaca in production mode -->
-  <script type="text/javascript" src="www/components/loader.js"></script>
-  <link rel="stylesheet" type="text/css" href="www/components/loader.css">
-  
+  <% for (var dep in htmlWebpackPlugin.options.externalJS) { %>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.options.externalJS[dep] %>"></script><% } %>
+  <% for (var dep in htmlWebpackPlugin.options.externalCSS) { %>
+    <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.options.externalCSS[dep] %>"><% } %>
+
   <!-- built styles file will be auto injected -->
 </head>
 <body>
